@@ -56,14 +56,23 @@
         <div class = "item-todo">To Do List</div>
 
     <script>
-        const TodoList = [];
+        let TodoList = [];
 
-        function add(){
+        const listFromLocalStorage = localStorage.getItem("Todolist");
+        if(listFromLocalStorage){
+            TodoList = JSON.parse(listFromLocalStorage);
+            renderTodolist();
+        }
+
+        function add() {
             const inputelement = document.getElementById('input')
-            TodoList.push(inputelement.value)
+            TodoList.push(inputelement.value);
+
+            localStorage.setItem('Todolist',JSON.stringify(TodoList));
+
             inputelement.value = ""
 
-            renderTodolist()
+            renderTodolist();
         }
         function renderTodolist(){
             const listcontainer = document.getElementById('list-container')
